@@ -1,0 +1,27 @@
+<div class="box">
+  <h1>Ricarica telefonica</h1>
+  <p>Scegliere l'operatore</p>
+  <form (ngSubmit)="topUp()" [formGroup]="telephoneForm">
+    <div class="form-outline mb-4">
+      <label for="operatore">Operatore</label>
+      <select formControlName="operatore" id="operatore">
+        <option value="iliad">Iliad</option>
+        <option value="vodafone">Vodafone</option>
+        <option value="tim">Tim</option>
+        <option value="coopvoce">Coop Voce</option>
+      </select>
+    </div>
+
+    <div class="form-outline mb-4">
+      <label for="importo">Importo</label>
+      <select formControlName="importo" id="importo">
+        <option value="5">5€</option>
+        <option value="10">10€</option>
+        <option value="20">20€</option>
+        <option value="50">50€</option>
+      </select>
+    </div>
+
+    <button type="submit">Ricarica</button>
+  </form>
+</div>

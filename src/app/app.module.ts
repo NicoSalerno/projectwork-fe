@@ -16,6 +16,7 @@ import { NavUserComponent } from './components/nav-user/nav-user.component';
 import { logoutInterceptor } from './utils/logout.interceptor';
 import { RegisterComponent } from './pages/register/register.component';
 import { SeeUsersComponent } from './pages/see-users/see-users.component';
+import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-up.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SeeUsersComponent } from './pages/see-users/see-users.component';
     NavBarComponent,
     NavUserComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    TelephoneTopUpComponent
   ],
   imports: [
     BrowserModule,

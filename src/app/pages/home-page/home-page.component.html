@@ -1,8 +1,31 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+
+
+<app-nav-bar></app-nav-bar>
+<div class="title"><h1>Benvenuto</h1></div>
 <div class="page-container">
-  <app-nav-bar></app-nav-bar>
-  <div class="a">
-    <div class="text">
-      <h1>Benvenuto</h1>
+  <div class="menu">
+      <span class="material-symbols-outlined">
+      home
+      </span>
+      <span class="material-symbols-outlined">
+      sim_card
+      </span>
+      <span class="material-symbols-outlined">
+      money_range
+      </span>
+  </div>
+  <div class="box">
+    <h1>{{"100.00 $"}}</h1>
+    <p>Ultimo movimenti recenti:</p> 
+    <div *ngFor="let m of movimenti$">
+      {{ m.Data }} - {{ m.DescrizioneEstesa }} - {{ m.Importo }} €
     </div>
+      <div class="view">
+        <a [routerLink]="['/telephone-top-up']">Visualizza tutti</a>
+      </div>
   </div>
 </div>

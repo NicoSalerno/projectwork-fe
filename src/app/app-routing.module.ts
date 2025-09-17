@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SeeUsersComponent } from './pages/see-users/see-users.component';
+import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-up.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'seeUsers',
     component: SeeUsersComponent
+  },
+  {
+    path:'telephone-top-up',
+    component: TelephoneTopUpComponent
   }
 ];
 

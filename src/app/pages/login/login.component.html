@@ -1,40 +1,44 @@
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-  rel="stylesheet"
-/>
+<div class="login-container">
+  <!-- Colonna sinistra: Login -->
+  <div class="login-left">
+    <div class="logo">
+      <h2>ITS Bank</h2>
+    </div>
+    <h1>Iniziamo!</h1>
+    <p>Benvenuto in ITS Bank - Entriamo nella piattaforma</p>
 
-<div class="page-container">
-  <div class="login-box">
-    <h1>Login</h1>
     <form (ngSubmit)="login()" [formGroup]="loginForm">
-      <!-- Email input -->
-      <div class="form-outline mb-4">
-        <label class="form-label">Email address</label>
-        <input type="email" class="form-control" formControlName="username" />
+      <!-- Email -->
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="username" placeholder="you@email.com" />
       </div>
 
-      <!-- Password input -->
-      <div class="form-outline mb-4">
-        <label class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          formControlName="password"
-        />
-      </div>
-      <div class="text-danger" *ngIf="loginError">
-        {{ loginError }}
+      <!-- Password -->
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="••••••••" />
       </div>
 
-      <!-- Submit button -->
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary btn-block mb-4">
-          Sign in
-        </button>
-      </div>
+      <!-- Submit -->
+      <button type="submit">Accedi</button>
     </form>
-    <p>Not registered? <a [routerLink]="['/register']">do it now</a> </p>
+
+    <p class="register-text">
+      Non registrato? <a [routerLink]="['/register']">Crea un account</a>
+    </p>
+  </div>
+
+  <!-- Colonna destra: Immagine/Testo -->
+  <div class="login-right">
+    <div class="overlay">
+      <h2>Entra nel futuro</h2>
+      <p>del pagamento, oggi!</p>
+      <div class="card-mockup">
+        <p><strong>12,347.23 $</strong></p>
+        <small>Bilancio combinato</small>
+        <p>Primary Card •••• 6917</p>
+      </div>
+    </div>
   </div>
 </div>

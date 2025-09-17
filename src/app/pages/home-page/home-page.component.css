@@ -1,6 +1,61 @@
-.a{
-    display: flex;
+body{
+  background-color: black;
+  display: flex;
+  max-height: 100vh;
 }
-.text{
-    margin-left: 100px;
+
+.page-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box{
+  background-color: rgba(57, 164, 66, 0.148);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 20px;
+  margin-top: 60px;
+  border-radius: 8px;
+  max-height: 500px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.menu {
+  display: flex;
+  background-color: rgba(57, 164, 66, 0.148);
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 20px;
+  margin-top: 60px;
+  border-radius: 8px;
+  max-height: 500px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+a{
+  padding: 3px;
+  border-style: solid;
+  border-color: rgba(127, 255, 212, 0);
+  border-radius: 6px;
+  background-color: rgba(110, 138, 96, 0.183);
+  color: black;
+  text-decoration: none;
+}
+
+.view{
+  margin-top: 20px;
+  text-align: end;
 }
