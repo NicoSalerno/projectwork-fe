@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { catchError, map, Subject, takeUntil, throwError } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +50,12 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.destroyed$.complete();
   }
 
+
+    login() {
+        this.router.navigate(['/homepage']);
+      }
+
+/*
   login() {
     const { username, password } = this.loginForm.value;
     this.authSrv.login(username!, password!)
@@ -61,5 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       .subscribe(() => {
         this.router.navigate([this.requestedUrl ? this.requestedUrl : '/homepage']);
       })
-  }
+  } */
+  
 }
