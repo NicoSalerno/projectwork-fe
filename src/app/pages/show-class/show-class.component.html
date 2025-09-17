@@ -1,0 +1,20 @@
+<div class="page-container">
+  <app-nav-bar></app-nav-bar>
+  <div class="a">
+    <app-side-panel></app-side-panel>
+
+    <div class="content">
+      <div class="text">
+        <h2>Your classes</h2>
+
+        <div *ngIf="classrooms.length === 0">No class</div>
+
+        <ul>
+          <li *ngFor="let classroom of classrooms">
+            {{ classroom.name }} ({{ classroom.students.length }} students)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

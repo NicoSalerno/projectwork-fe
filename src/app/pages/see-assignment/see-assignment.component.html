@@ -1,0 +1,109 @@
+<div class="page-container">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <app-nav-bar></app-nav-bar>
+  <div class="a">
+    <app-side-panel></app-side-panel>
+
+    <div *appIfTeacher>
+      <div class="form">
+        <form
+          (ngSubmit)="seeAssignment()"
+          [formGroup]="seeForm"
+          class="login-box"
+        >
+          <!-- Id classe -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="classId">Class id*</label>
+            <input
+              id="classId"
+              type="text"
+              class="form-control"
+              formControlName="classId"
+            />
+          </div>
+
+          <!-- Errore -->
+          <div class="text-danger" *ngIf="loginError">
+            {{ loginError }}
+          </div>
+
+          <!-- Pulsante -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              See
+            </button>
+          </div>
+        </form>
+        <!-- Lista di tutti gli assignment -->
+        <div *ngIf="ass.length > 0" class="mt-4">
+          <h1>Assignments</h1>
+
+          <div *ngFor="let a of ass" class="card mb-3 p-3 shadow-sm">
+            <h2>{{ a.title }}</h2>
+            <p><strong>Class:</strong> {{ a.classroom }}</p>
+            <p><strong>Created at:</strong> {{ a.createdAt | date }}</p>
+            <p><strong>Created by:</strong> {{ a.createdBy | json }}</p>
+            <p>
+              <strong>Completed by:</strong> {{ a.completedCount }} 
+            </p>
+            <div *ngIf="a.students?.length">
+              <h6>Students:</h6>
+              <ul>
+                <li *ngFor="let s of a.students">
+                  {{ s.studentId }} - Completed:
+                  {{ s.completed ? "V" : "X" }} 
+                  {{ s.completionDate | date}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *appIfStudent>
+      <div class="form">
+        <form (ngSubmit)="setDone()" [formGroup]="seeForm" class="login-box">
+          <!-- Id classe -->
+          <div class="form-outline mb-4">
+            <label class="form-label">Classroom Id</label>
+            <input type="text" class="form-control" formControlName="classId" />
+          </div>
+
+          <!-- Id Assignment -->
+          <div class="form-outline mb-4">
+            <label class="form-label">Assignment id</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="assignmetId"
+            />
+          </div>
+
+          <!-- Errore -->
+          <div class="text-danger" *ngIf="loginError">
+            {{ loginError }}
+          </div>
+
+          <!-- Pulsante -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Mark as done
+            </button>
+          </div>
+        </form>
+        <div *ngIf="assi && assi !== true" class="alert alert-success">
+          Compito segnato come completato: {{ assi.title }} (ID: {{ assi.id }})
+        </div>
+
+        <div *ngIf="assi === true" class="alert alert-danger">
+          Compito già completato.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

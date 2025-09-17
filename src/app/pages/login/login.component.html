@@ -1,0 +1,40 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="page-container">
+  <div class="login-box">
+    <h1>Login</h1>
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-control" formControlName="username" />
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+      </div>
+      <div class="text-danger" *ngIf="loginError">
+        {{ loginError }}
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-block mb-4">
+          Sign in
+        </button>
+      </div>
+    </form>
+    <p>Not registered? <a [routerLink]="['/register']">do it now</a> </p>
+  </div>
+</div>

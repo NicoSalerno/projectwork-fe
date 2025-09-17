@@ -1,0 +1,46 @@
+<div class="page-container">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <app-nav-bar></app-nav-bar>
+  <div class="a">
+    <app-side-panel></app-side-panel>
+
+    <div *appIfTeacher>
+      <div class="form">
+        <form (ngSubmit)="seeUser()" [formGroup]="seeForm" class="login-box">
+          <!-- role -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="classId">Role</label>
+            <input
+              id="role"
+              type="text"
+              class="form-control"
+              formControlName="role"
+            />
+          </div>
+
+          <!-- Errore -->
+          <div class="text-danger" *ngIf="loginError">
+            {{ loginError }}
+          </div>
+
+          <!-- Pulsante -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              See
+            </button>
+          </div>
+        </form>
+        <ul>
+          <li *ngFor="let user of users">
+            <pre>{{ user | json }}</pre>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

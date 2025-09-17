@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.panel-container{
+    display: flex;
+    flex-direction: column;
+    height: 89vh;
+    border-right: 1px solid grey;
+    width: 30vh;
+    margin-left: 5px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}

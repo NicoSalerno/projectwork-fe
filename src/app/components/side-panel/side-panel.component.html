@@ -1,0 +1,16 @@
+<div class="panel-container">
+  <a [routerLink]="['/seeUsers']">see users</a>
+  <hr />
+  <div *appIfTeacher>
+    <a [routerLink]="['/createClass']">create classroom</a>
+    <hr />
+  </div>
+  <a [routerLink]="['/showClasses']">classrooms list</a>
+  <hr />
+  <div *appIfTeacher>
+    <a [routerLink]="['/setAssignment']">set assignment</a>
+    <hr />
+  </div>
+  <a [routerLink]="['/seeAssignment']">see assignment</a>
+  <hr />
+</div>

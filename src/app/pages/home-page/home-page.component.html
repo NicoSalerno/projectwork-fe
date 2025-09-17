@@ -1,0 +1,10 @@
+<div class="page-container">
+  <app-nav-bar></app-nav-bar>
+  <div class="a">
+    <app-side-panel></app-side-panel>
+    <div class="text">
+      <h1>Benvenuto</h1>
+      {{ (currentUser$ | async)?.name }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="page-container">
+  <div class="login-box">
+    <h1>Register</h1>
+    <form (ngSubmit)="register()" [formGroup]="registerForm">
+      <div class="form-outline mb-4">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="firstName" />
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label">Surname</label>
+        <input type="text" class="form-control" formControlName="lastName" />
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label">Role</label>
+        <input type="text" class="form-control" formControlName="role" />
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label">Picture</label>
+        <input type="text" class="form-control" formControlName="picture" />
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label">Username</label>
+        <input type="email" class="form-control" formControlName="username" />
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+      </div>
+      <div class="text-danger" *ngIf="loginError">
+        {{ loginError }}
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-block mb-4">
+          Sign up
+        </button>
+      </div>
+    </form>
+    <p>Already registered? <a [routerLink]="['/']">go</a></p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<nav class="navbar bg-danger navbar-expand mb-3" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="text-dark" [routerLink]="['/homepage']">ITS</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav"></ul>
+    </div>
+    <ul class="navbar-nav me-3">
+      <app-nav-user
+        *ngIf="currentUser$ | async as currentUser; else loginButton"
+        (logout)="logout()"
+        [user]="currentUser"
+      ></app-nav-user>
+      <ng-template #loginButton>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Login</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>
