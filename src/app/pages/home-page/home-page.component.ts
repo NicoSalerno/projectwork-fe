@@ -14,8 +14,16 @@ export class HomePageComponent {
   protected authSrv = inject(AuthService);
 
   currentUser$ = this.authSrv.currentUser$;
+  currentUser?: User;
+
+  name = this.authSrv.currentUser$.pipe
 
   movimenti$: Movimento[] = TMovimentiContoCorrente.slice(-3);
 
+  constructor() {
+    this.currentUser$.subscribe(user => {
+      this.currentUser = user ? user : undefined;
+    });
+  }
 
 }

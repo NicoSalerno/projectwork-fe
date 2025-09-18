@@ -49,16 +49,16 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>('/api/login', { username, password }).pipe(
+  login(email: string, password: string) {
+    return this.http.post<any>('/api/login', { email, password }).pipe(
       tap((res) => this.jwtSrv.setToken(res.token)),
       tap((res) => this._currentUser$.next(res.user)),
       map((res) => res.user)
     );
   }
 
-  register(firstName: string, lastName: string, role: string, picture: string, username: string, password: string){
-    return this.http.post<any>('/api/register', { firstName, lastName, role, picture, username, password });
+  register(email: string, password: string, confermaPassword: string, NomeTitolare: string, CognomeTitolare:string){
+    return this.http.post<any>('/api/register', { email, password, confermaPassword, NomeTitolare, CognomeTitolare});
   }
 
   fetchUser() {

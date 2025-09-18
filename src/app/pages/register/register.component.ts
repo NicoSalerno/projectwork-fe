@@ -19,15 +19,14 @@ export class RegisterComponent {
   protected destroyed$ = new Subject<void>();
 
   registerForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    role: ['', Validators.required],
-    picture: ['', Validators.required],
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
+    confermaPassword: ['', Validators.required],
+    NomeTitolare: ['', Validators.required],
+    CognomeTitolare: ['', Validators.required],
   });
 
-  loginError = '';
+  registerError = '';
 
   requestedUrl: string | null = null;
 
@@ -35,7 +34,7 @@ export class RegisterComponent {
     this.registerForm.valueChanges
       .pipe(takeUntil(this.destroyed$))
       .subscribe((_) => {
-        this.loginError = '';
+        this.registerError = '';
       });
 
     this.activatedRoute.queryParams
@@ -53,31 +52,14 @@ export class RegisterComponent {
     this.destroyed$.complete();
   }
 
-  login() {
-    const { username, password } = this.registerForm.value;
-    this.authSrv
-      .login(username!, password!)
-      .pipe(
-        catchError((response) => {
-          this.loginError = response.error.message;
-          return throwError(() => response);
-        })
-      )
-      .subscribe(() => {
-        this.router.navigate([
-          this.requestedUrl ? this.requestedUrl : '/homepage',
-        ]);
-      });
-  }
-
   register() {
-    const { firstName, lastName, role, picture, username, password } =
+    const { email, password, confermaPassword, NomeTitolare, CognomeTitolare } =
       this.registerForm.value;
     this.authSrv
-      .register(firstName!, lastName!, role!, picture!, username!, password!)
+      .register(email!, password!, confermaPassword!, NomeTitolare!, CognomeTitolare!)
       .pipe(
         catchError((response) => {
-          this.loginError = response.error.message;
+          this.registerError = response.error.message;
           return throwError(() => response);
         })
       )

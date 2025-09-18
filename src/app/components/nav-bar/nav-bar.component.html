@@ -1,18 +1,51 @@
-<nav class="navbar bg-success navbar-expand mb-3" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm modern-navbar">
   <div class="container-fluid">
-    <a class="text-dark" [routerLink]="['/homepage']">ITS Bank</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav"></ul>
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" [routerLink]="['/homepage']">
+      <i class="bi bi-bank2 me-2"></i> ITS Bank
+    </a>
+
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links centrati -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/services']">Servizi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/about']">Chi Siamo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/contact']">Contatti</a>
+        </li>
+      </ul>
     </div>
-    <ul class="navbar-nav me-3">
+
+    <!-- Pulsante Login a destra -->
+    <ul class="navbar-nav ms-auto">
       <app-nav-user
         *ngIf="currentUser$ | async as currentUser; else loginButton"
         (logout)="logout()"
         [user]="currentUser"
       ></app-nav-user>
+
       <ng-template #loginButton>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']">Login</a>
+          <a class="btn btn-light btn-sm fw-semibold px-3 rounded-pill" [routerLink]="['/']">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          </a>
         </li>
       </ng-template>
     </ul>

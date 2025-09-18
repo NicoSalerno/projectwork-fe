@@ -119,3 +119,8 @@ button:hover {
   display: inline-block;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
 }
+
+.text-error{
+  color: red;
+  padding-top: 15px;
+}

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   protected destroyed$ = new Subject<void>();
 
   loginForm = this.fb.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required]
   });
 
@@ -50,15 +50,9 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.destroyed$.complete();
   }
 
-
-    login() {
-        this.router.navigate(['/homepage']);
-      }
-
-/*
   login() {
-    const { username, password } = this.loginForm.value;
-    this.authSrv.login(username!, password!)
+    const { email, password } = this.loginForm.value;
+    this.authSrv.login(email!, password!)
       .pipe(
         catchError(response => {
           this.loginError = response.error.message;
@@ -68,6 +62,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       .subscribe(() => {
         this.router.navigate([this.requestedUrl ? this.requestedUrl : '/homepage']);
       })
-  } */
+  } 
   
 }

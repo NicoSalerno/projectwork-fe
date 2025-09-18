@@ -1,58 +1,56 @@
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-  rel="stylesheet"
-/>
+<div class="login-container">
+  <!-- Colonna sinistra: Login -->
+  <div class="login-left">
+    <h1>Benvenuto a bordo!</h1>
+    <p>ITS Bank - Entriamo nella piattaforma</p>
 
-<div class="page-container">
-  <div class="login-box">
-    <h1>Register</h1>
     <form (ngSubmit)="register()" [formGroup]="registerForm">
-      <div class="form-outline mb-4">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" formControlName="firstName" />
+      <!-- Email -->
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="you@email.com" />
       </div>
 
-      <div class="form-outline mb-4">
-        <label class="form-label">Surname</label>
-        <input type="text" class="form-control" formControlName="lastName" />
+      <!-- Password -->
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="••••••••" />
       </div>
 
-      <div class="form-outline mb-4">
-        <label class="form-label">Role</label>
-        <input type="text" class="form-control" formControlName="role" />
+      <div class="form-group">
+        <label>Conferma password</label>
+        <input type="password" formControlName="confermaPassword" placeholder="••••••••">
       </div>
 
-      <div class="form-outline mb-4">
-        <label class="form-label">Picture</label>
-        <input type="text" class="form-control" formControlName="picture" />
+      <div class="form-group">
+        <label>Nome titolare</label>
+        <input type="text" formControlName="nomeTitolare" placeholder="Mario">
       </div>
 
-      <div class="form-outline mb-4">
-        <label class="form-label">Username</label>
-        <input type="email" class="form-control" formControlName="username" />
+      <div class="form-group">
+        <label>Cognome titolare</label>
+        <input type="text" formControlName="nomeTitolare" placeholder="Mario">
       </div>
 
-      <div class="form-outline mb-4">
-        <label class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          formControlName="password"
-        />
-      </div>
-      <div class="text-danger" *ngIf="loginError">
-        {{ loginError }}
-      </div>
-
-      <!-- Submit button -->
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary btn-block mb-4">
-          Sign up
-        </button>
-      </div>
+      <!-- Submit -->
+      <button type="submit">Accedi</button>
     </form>
-    <p>Already registered? <a [routerLink]="['/']">go</a></p>
+  </div>
+  
+  <div class="text-error" *ngIf="registerError">
+    {{ registerError }}
+  </div>
+
+  <!-- Colonna destra: Immagine/Testo -->
+  <div class="login-right">
+    <div class="overlay">
+      <h2>Entra nel futuro</h2>
+      <p>del pagamento, oggi!</p>
+      <div class="card-mockup">
+        <p><strong>12,347.23 $</strong></p>
+        <small>Bilancio combinato</small>
+        <p>Primary Card •••• 6917</p>
+      </div>
+    </div>
   </div>
 </div>

@@ -13,8 +13,9 @@ body{
 
 .title{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  margin-left: 20px;
+  padding-top: 20px;
 }
 
 .box{
@@ -27,9 +28,17 @@ body{
   margin-top: 60px;
   border-radius: 8px;
   max-height: 500px;
+  min-height: 200px;
+  min-width: 320px;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+.card-logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
 .menu {
   display: flex;
   background-color: rgba(57, 164, 66, 0.148);
@@ -39,23 +48,81 @@ body{
   justify-content: center;
   padding: 15px;
   margin: 20px;
+  margin-bottom: 0;
   margin-top: 60px;
   border-radius: 8px;
   max-height: 500px;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-a{
-  padding: 3px;
+a{  
   border-style: solid;
   border-color: rgba(127, 255, 212, 0);
   border-radius: 6px;
-  background-color: rgba(110, 138, 96, 0.183);
   color: black;
   text-decoration: none;
 }
 
-.view{
-  margin-top: 20px;
-  text-align: end;
+.material-symbols-outlined:hover {
+  color: green;
+}
+
+.second-half{
+  display: flex;
+  justify-content: center;
+}
+.movements{
+  display: flex;
+  background-color: rgba(202, 215, 203, 0.148);
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  margin: 20px;
+  margin-top: 60px;
+  border-radius: 8px;
+  max-height: 500px;
+  width: 600px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.movements-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+}
+
+.moneyIcon{
+  display: flex;
+  background-color: rgba(159, 165, 160, 0.292);
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+span{
+  padding: 10px;
+  cursor: pointer;
+}
+
+.movement-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.movement-text{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
