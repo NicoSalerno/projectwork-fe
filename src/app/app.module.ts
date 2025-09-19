@@ -17,6 +17,9 @@ import { logoutInterceptor } from './utils/logout.interceptor';
 import { RegisterComponent } from './pages/register/register.component';
 import { SeeUsersComponent } from './pages/see-users/see-users.component';
 import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-up.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-
     NavUserComponent,
     RegisterComponent,
     LoginComponent,
-    TelephoneTopUpComponent
+    TelephoneTopUpComponent,
+    SettingsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
+    MatDialogModule,
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor, logoutInterceptor])),

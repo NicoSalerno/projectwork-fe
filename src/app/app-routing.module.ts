@@ -5,6 +5,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SeeUsersComponent } from './pages/see-users/see-users.component';
 import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-up.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:'telephone-top-up',
     component: TelephoneTopUpComponent
+  },
+  {
+    path:'settings',
+    component:SettingsComponent
   }
 ];
 

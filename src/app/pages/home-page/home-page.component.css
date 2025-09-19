@@ -126,3 +126,28 @@ span{
   align-items: center;
   gap: 12px;
 }
+
+@keyframes fallIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fall-in {
+  animation: fallIn 0.8s;
+}
+
+/* Per animazioni a cascata sugli elementi figli */
+.fall-in-delay-1 { animation-delay: 0.1s; }
+.fall-in-delay-2 { animation-delay: 0.2s; }
+.fall-in-delay-3 { animation-delay: 0.3s; }
+.fall-in-delay-4 { animation-delay: 0.4s; }

@@ -5,24 +5,32 @@
 
 
 <app-nav-bar></app-nav-bar>
-<div class="title">
+<div class="title fall-in fall-in-delay-1">
   <h1>Benvenuto, {{currentUser?.NomeTitolare}}</h1> 
   <p>Bentornato!</p>
 </div>
-<div class="page-container">
+<div class="page-container fall-in fall-in-delay-2">
     <div class="menu">
-      <span class="material-symbols-outlined">
-      home
-      </span>
-      <span class="material-symbols-outlined">
-      sim_card
-      </span>
-      <span class="material-symbols-outlined">
-      money_range
-      </span>
-      <span class="material-symbols-outlined">
-      settings
-      </span>
+      <a [routerLink]="['/homepage']">      
+        <span class="material-symbols-outlined">
+        home
+        </span> 
+      </a>
+      <a [routerLink]="['/telephone-top-up']">      
+        <span class="material-symbols-outlined">
+        sim_card
+        </span> 
+      </a>
+      <a [routerLink]="['/telephone-top-up']">      
+        <span class="material-symbols-outlined">
+        money_range
+        </span> 
+      </a>
+      <a [routerLink]="['/settings']">      
+        <span class="material-symbols-outlined">
+        settings
+        </span> 
+      </a>
     </div>
     <div class="box">
       <div class="card-logo">
@@ -36,7 +44,7 @@
     </div>
     
 </div>
-<div class="second-half">
+<div class="second-half fall-in fall-in-delay-3">
   <div class="movements">
     <div class="movements-title">
         <a [routerLink]="['/telephone-top-up']">MOVIMENTI </a>

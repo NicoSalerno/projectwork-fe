@@ -61,8 +61,12 @@ export class AuthService {
     return this.http.post<any>('/api/register', { email, password, confermaPassword, NomeTitolare, CognomeTitolare});
   }
 
+  changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+    return this.http.post<User>('api/changePassword', {oldPassword, newPassword, confirmNewPassword})
+  }
+
   fetchUser() {
-    return this.http.get<User>('/api/users/me').pipe(
+    return this.http.get<User>('/api/me').pipe(
       catchError((_) => {
         return of(null);
       }),

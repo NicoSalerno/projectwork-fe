@@ -19,6 +19,7 @@ export class TelephoneTopUpComponent {
     operatore: ['', Validators.required],
     importo: ['', Validators.required]
   });
+  
   topUp(){
 
   }

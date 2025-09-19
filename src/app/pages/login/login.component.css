@@ -124,3 +124,18 @@ button:hover {
   color: red;
   padding-top: 15px;
 }
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}

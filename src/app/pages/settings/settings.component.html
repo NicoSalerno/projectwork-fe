@@ -1,0 +1,33 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="page-container">
+  <div class="box">
+    <h2>{{ currentUser?.NomeTitolare }} {{ currentUser?.CognomeTitolare }}</h2>
+
+    <div class="fields">
+      <div class="column">
+        <p>Nome: </p>
+        <div class="field-box">
+          <p>{{ currentUser?.NomeTitolare }}</p>
+        </div>
+        <p>Data creazione: </p>
+        <div class="field-box">
+          <p>{{ '—' }}</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <p>Cognome: </p>
+        <div class="field-box">
+          <p>{{ currentUser?.CognomeTitolare }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="center mt-3">
+      <button mat-flat-button color="primary" (click)="openChangePassword()">
+        Cambia Password
+      </button>
+    </div>
+  </div>
+</div>

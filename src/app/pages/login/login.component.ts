@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.authSrv.login(email!, password!)
       .pipe(
         catchError(response => {
-          this.loginError = response.error.message;
+          this.loginError = response.error.error;
           return throwError(() => response);
         })
       )
