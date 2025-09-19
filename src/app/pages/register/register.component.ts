@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, map, Subject, takeUntil, throwError } from 'rxjs';
+import { Component, inject } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { catchError, map, Subject, takeUntil, throwError } from "rxjs";
 
 @Component({
-  selector: 'app-register',
+  selector: "app-register",
   standalone: false,
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  templateUrl: "./register.component.html",
+  styleUrl: "./register.component.css",
 })
 export class RegisterComponent {
   protected fb = inject(FormBuilder);
@@ -19,14 +19,26 @@ export class RegisterComponent {
   protected destroyed$ = new Subject<void>();
 
   registerForm = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-    confermaPassword: ['', Validators.required],
-    NomeTitolare: ['', Validators.required],
-    CognomeTitolare: ['', Validators.required],
+    email: ["", [Validators.required]],
+    password: [
+      "",
+      [
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/),
+      ],
+    ],
+    confermaPassword: [
+      "",
+      [
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/),
+      ],
+    ],
+    NomeTitolare: ["", [Validators.required]],
+    CognomeTitolare: ["", [Validators.required]],
   });
 
-  registerError = '';
+  registerError = "";
 
   requestedUrl: string | null = null;
 
@@ -34,13 +46,13 @@ export class RegisterComponent {
     this.registerForm.valueChanges
       .pipe(takeUntil(this.destroyed$))
       .subscribe((_) => {
-        this.registerError = '';
+        this.registerError = "";
       });
 
     this.activatedRoute.queryParams
       .pipe(
         takeUntil(this.destroyed$),
-        map((params) => params['requestedUrl'])
+        map((params) => params["requestedUrl"])
       )
       .subscribe((url) => {
         this.requestedUrl = url;
@@ -56,7 +68,13 @@ export class RegisterComponent {
     const { email, password, confermaPassword, NomeTitolare, CognomeTitolare } =
       this.registerForm.value;
     this.authSrv
-      .register(email!, password!, confermaPassword!, NomeTitolare!, CognomeTitolare!)
+      .register(
+        email!,
+        password!,
+        confermaPassword!,
+        NomeTitolare!,
+        CognomeTitolare!
+      )
       .pipe(
         catchError((response) => {
           this.registerError = response.error.message;
@@ -64,9 +82,7 @@ export class RegisterComponent {
         })
       )
       .subscribe(() => {
-        this.router.navigate([
-          this.requestedUrl ? this.requestedUrl : '/',
-        ]);
+        this.router.navigate([this.requestedUrl ? this.requestedUrl : "/"]);
       });
   }
 }

@@ -111,6 +111,10 @@ button:hover {
   border-color: #1d8348;
 }
 
+.custom-select{
+  border-radius: 8px;
+}
+
 @media (max-width: 500px) {
   .box {
     width: 95vw;

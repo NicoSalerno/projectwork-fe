@@ -51,11 +51,21 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<any>('/api/login', { email, password }).pipe(
-      tap((res) => this.jwtSrv.setToken(res.token)),
-      tap((res) => this._currentUser$.next(res.user)),
-      map((res) => res.user)
+      tap(res => this.jwtSrv.setToken(res.token)),
+      tap(res => {
+        const userWithConto = {
+          ...res.user,
+          contoCorrenteId: res.contoCorrenteId
+        };
+        this._currentUser$.next(userWithConto);
+      }),
+      map(res => ({
+        ...res.user,
+        contoCorrenteId: res.contoCorrenteId
+      }))
     );
   }
+
 
   register(email: string, password: string, confermaPassword: string, NomeTitolare: string, CognomeTitolare:string){
     return this.http.post<any>('/api/register', { email, password, confermaPassword, NomeTitolare, CognomeTitolare});

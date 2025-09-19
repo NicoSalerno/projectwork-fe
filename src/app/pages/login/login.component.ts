@@ -52,16 +52,17 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   login() {
     const { email, password } = this.loginForm.value;
+
     this.authSrv.login(email!, password!)
       .pipe(
-        catchError(response => {
-          this.loginError = response.error.error;
+        catchError((response) => {
+          // La risposta dell’API è { error: "...", message: "..." }
+          this.loginError = response.error?.message || 'Email o password non corretti (a mano)';
           return throwError(() => response);
         })
       )
       .subscribe(() => {
         this.router.navigate([this.requestedUrl ? this.requestedUrl : '/homepage']);
-      })
-  } 
-  
+      });
+  }
 }

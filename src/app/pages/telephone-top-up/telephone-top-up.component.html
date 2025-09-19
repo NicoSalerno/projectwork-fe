@@ -2,28 +2,48 @@
 
 <div class="box">
   <h1>Ricarica telefonica</h1>
-  <p>Scegliere l'operatore</p>
-  <form (ngSubmit)="topUp()" [formGroup]="telephoneForm">
-    <div class="form-outline mb-4">
-      <label for="operatore">Operatore</label>
-      <select formControlName="operatore" id="operatore">
+  <p>Scegliere l'operatore e l'importo</p>
+
+  <form [formGroup]="telephoneForm" (ngSubmit)="topUp()">
+    <!-- Operatore -->
+    <div class="form-group">
+      <label for="operatoreTelefonico">Operatore</label>
+      <select id="operatoreTelefonico" formControlName="operatoreTelefonico">
+        <option value="">Seleziona operatore</option>
         <option value="iliad">Iliad</option>
         <option value="vodafone">Vodafone</option>
         <option value="tim">Tim</option>
         <option value="coopvoce">Coop Voce</option>
       </select>
+      <div *ngIf="telephoneForm.get('operatoreTelefonico')?.invalid && telephoneForm.get('operatoreTelefonico')?.touched" class="error">
+        Seleziona un operatore.
+      </div>
     </div>
 
-    <div class="form-outline mb-4">
+    <!-- Importo -->
+    <div class="form-group">
       <label for="importo">Importo</label>
-      <select formControlName="importo" id="importo">
+      <select id="importo" formControlName="importo">
+        <option value="">Seleziona importo</option>
         <option value="5">5€</option>
         <option value="10">10€</option>
         <option value="20">20€</option>
         <option value="50">50€</option>
       </select>
+      <div *ngIf="telephoneForm.get('importo')?.invalid && telephoneForm.get('importo')?.touched" class="error">
+        Seleziona un importo.
+      </div>
     </div>
 
-    <button type="submit">Ricarica</button>
+    <!-- Numero di telefono -->
+    <div class="form-group">
+      <label for="number">Numero di telefono</label>
+      <input type="number" id="number" formControlName="number" placeholder="Inserisci numero">
+      <div *ngIf="telephoneForm.get('number')?.invalid && telephoneForm.get('number')?.touched" class="error">
+        Inserisci un numero valido.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="telephoneForm.invalid">Ricarica</button>
   </form>
 </div>

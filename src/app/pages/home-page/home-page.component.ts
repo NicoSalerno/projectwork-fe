@@ -1,29 +1,42 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../entities/user.entity';
 import { TMovimentiContoCorrente } from '../../utils/data';
-import { Movimento } from '../../utils/models';
+import { Movimento, ContoCorrente } from '../../utils/models';
+import { BankService } from '../../services/bank.service';
+import { filter, map, switchMap } from 'rxjs';
+
 @Component({
   selector: 'app-home-page',
   standalone: false,
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
-
+export class HomePageComponent implements OnInit {
   protected authSrv = inject(AuthService);
+  protected bankSrv = inject(BankService);
 
   currentUser$ = this.authSrv.currentUser$;
   currentUser?: User;
 
-  name = this.authSrv.currentUser$.pipe
-
   movimenti$: Movimento[] = TMovimentiContoCorrente.slice(-3);
+  
+  contoCorrenteID$ = this.authSrv.currentUser$.pipe(
+    map(user => user?.contoCorrenteId)
+  );
+
+  contoCorrente$ = this.contoCorrenteID$.pipe(
+    filter((id): id is string => !!id),
+    switchMap(id => this.bankSrv.getContoCorrenteById(id))
+  );
+
+  movimenti: Movimento[] = TMovimentiContoCorrente.slice(-3);
 
   constructor() {
     this.currentUser$.subscribe(user => {
-      this.currentUser = user ? user : undefined;
+      this.currentUser = user ?? undefined;
     });
   }
 
+  ngOnInit(): void {}
 }

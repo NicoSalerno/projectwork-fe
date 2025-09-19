@@ -1,25 +1,31 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="page-container">
-  <div class="box">
-    <h2>{{ currentUser?.NomeTitolare }} {{ currentUser?.CognomeTitolare }}</h2>
+  <div class="box" *ngIf="currentUser$ | async as user">
+    <h2>{{ user.NomeTitolare }} {{ user.CognomeTitolare }}</h2>
 
     <div class="fields">
       <div class="column">
-        <p>Nome: </p>
+        <p>Nome:</p>
         <div class="field-box">
-          <p>{{ currentUser?.NomeTitolare }}</p>
+          <p>{{ user.NomeTitolare }}</p>
         </div>
-        <p>Data creazione: </p>
-        <div class="field-box">
-          <p>{{ '—' }}</p>
+
+        <p>Data creazione:</p>
+        <div class="field-box" *ngIf="contoCorrente$ | async as conto">
+          <p>{{ conto.DataApertura | date:'dd/MM/yyyy' }}</p>
+        </div>
+
+        <p>IBAN: </p>
+        <div class="field-box" *ngIf="contoCorrente$ | async as conto">
+          <p>{{ conto.IBAN }}</p>
         </div>
       </div>
 
       <div class="column">
-        <p>Cognome: </p>
+        <p>Cognome:</p>
         <div class="field-box">
-          <p>{{ currentUser?.CognomeTitolare }}</p>
+          <p>{{ user.CognomeTitolare }}</p>
         </div>
       </div>
     </div>
