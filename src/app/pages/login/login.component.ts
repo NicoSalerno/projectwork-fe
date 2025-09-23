@@ -1,9 +1,8 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { catchError, map, Subject, takeUntil, throwError } from 'rxjs';
+import { catchError, map, Subject, switchMap, takeUntil, throwError, timer } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit, OnDestroy {
   protected fb = inject(FormBuilder);
   protected authSrv = inject(AuthService);
   protected router = inject(Router);
@@ -25,14 +24,24 @@ export class LoginComponent implements OnInit, OnDestroy{
   });
 
   loginError = '';
+  inactivityMessage = '';   // messaggio che mostriamo
 
   requestedUrl: string | null = null;
 
   ngOnInit() {
+    // Reset error quando cambia il form
     this.loginForm.valueChanges
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(_ => {
-        this.loginError = '';
+      .pipe(
+        takeUntil(this.destroyed$),
+        switchMap(() => {
+          this.loginError = '';
+          this.inactivityMessage = '';
+          return timer(30000);
+        })
+      )
+      .subscribe(() => {
+        this.loginForm.reset();
+        this.inactivityMessage = 'Sessione scaduta per inattività (30 secondi).';
       });
 
     this.activatedRoute.queryParams
@@ -56,8 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.authSrv.login(email!, password!)
       .pipe(
         catchError((response) => {
-          // La risposta dell’API è { error: "...", message: "..." }
-          this.loginError = response.error?.message || 'Email o password non corretti (a mano)';
+          this.loginError = response.error?.message || 'Email o password non corretti';
           return throwError(() => response);
         })
       )

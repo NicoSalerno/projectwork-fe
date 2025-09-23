@@ -19,7 +19,8 @@ export class HomePageComponent implements OnInit {
   currentUser$ = this.authSrv.currentUser$;
   currentUser?: User;
 
-  movimenti$: Movimento[] = TMovimentiContoCorrente.slice(-3);
+  movimenti$: Movimento[] = []
+  saldo: number = 0;
   
   contoCorrenteID$ = this.authSrv.currentUser$.pipe(
     map(user => user?.contoCorrenteId)
@@ -30,13 +31,23 @@ export class HomePageComponent implements OnInit {
     switchMap(id => this.bankSrv.getContoCorrenteById(id))
   );
 
-  movimenti: Movimento[] = TMovimentiContoCorrente.slice(-3);
-
-  constructor() {
-    this.currentUser$.subscribe(user => {
-      this.currentUser = user ?? undefined;
-    });
+  ngOnInit(): void {
+    // Recupera currentUser e movimenti solo quando contoCorrenteId è disponibile
+    this.authSrv.currentUser$
+      .pipe(
+        filter((user): user is User => !!user?.contoCorrenteId),
+        switchMap(user => {
+          this.currentUser = user; // aggiorna currentUser
+          return this.bankSrv.getMovimentiConto(user.contoCorrenteId!);
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.saldo = res.saldoFinale;
+          this.movimenti$ = res.movimenti.slice(-3); // ultimi 3 movimenti
+        },
+        error: (err) => console.error('Errore nel recupero movimenti:', err)
+      });
   }
 
-  ngOnInit(): void {}
 }

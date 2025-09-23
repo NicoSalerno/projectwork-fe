@@ -38,9 +38,9 @@
     <!-- Numero di telefono -->
     <div class="form-group">
       <label for="number">Numero di telefono</label>
-      <input type="number" id="number" formControlName="number" placeholder="Inserisci numero">
+      <input type="tel" id="number" formControlName="number" placeholder="Inserisci numero">
       <div *ngIf="telephoneForm.get('number')?.invalid && telephoneForm.get('number')?.touched" class="error">
-        Inserisci un numero valido.
+        <p style="color: red; padding-top: 10px;">Inserisci un numero valido.</p>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { ContoCorrente } from "../entities/user.entity";
@@ -9,26 +9,37 @@ import { ContoCorrente } from "../entities/user.entity";
 export class BankService {
   protected http = inject(HttpClient);
 
-  getContoCorrenteById(id: string): Observable<ContoCorrente> {
+  getContoCorrenteById(id?: string): Observable<ContoCorrente> {
     return this.http.get<ContoCorrente>(
-      `api/ContoCorrente/getContoCorrenteById/${id}`
+      `/api/ContoCorrente/getContoCorrenteById/${id}`
     );
   }
 
+  getMovimentiConto(contoCorrenteId: string): Observable<any> {
+    const params = new HttpParams().set('ContoCorrenteID', contoCorrenteId);
+    return this.http.get(`/api/Movimenti/getMovimentiConto`, { params });
+  }
+
   addPhone(
-    ContoCorrenteID: string,
+    contoId: string,
+    Data: string,
     Importo: number,
-    CategoriaMovimento: string,
+    CategoriaMovimentoID: string,
     OperatoreTelefonico: string,
-    NumeroTelefono: number
+    NumeroTelefono: string
   ) {
     const payload = {
-      ContoCorrenteID,
+      Data,
       Importo,
-      CategoriaMovimento,
+      CategoriaMovimentoID,
       OperatoreTelefonico,
       NumeroTelefono,
     };
-    return this.http.post("/api/Movimenti/addRicarica", payload);
+
+    return this.http.post(
+      `/api/Movimenti/addRicarica/${contoId}`,
+      payload
+    );
   }
+
 }

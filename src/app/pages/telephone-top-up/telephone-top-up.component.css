@@ -45,14 +45,16 @@ h1 {
 }
 
 
-label {
+label, input {
   font-weight: 600;
   color: #145a32;
   display: block;
   margin-bottom: 0.5rem;
 }
 
-select {
+
+
+select, input {
   width: 100%;
   padding: 0.8rem;
   border-radius: 8px;
