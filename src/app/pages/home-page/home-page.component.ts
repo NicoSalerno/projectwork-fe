@@ -44,7 +44,8 @@ export class HomePageComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.saldo = res.saldoFinale;
-          this.movimenti$ = res.movimenti.slice(-3); // ultimi 3 movimenti
+          console.log(res.saldoFinale)
+          this.movimenti$ = res.movimenti.slice(-5); // ultimi 5 movimenti
         },
         error: (err) => console.error('Errore nel recupero movimenti:', err)
       });

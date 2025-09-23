@@ -19,7 +19,7 @@ export class RegisterComponent {
   protected destroyed$ = new Subject<void>();
 
   registerForm = this.fb.group({
-    email: ["", [Validators.required]],
+    email: ["", [Validators.required, Validators.email]],
     password: [
       "",
       [

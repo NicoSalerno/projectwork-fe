@@ -21,8 +21,8 @@ export class ChangePasswordComponent {
 
   form = this.fb.group({
     oldPassword: ["", [Validators.required, Validators.minLength(8)]],
-    newPassword: ["", [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ["", [Validators.required, Validators.minLength(8)]],
+    newPassword: ["", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)]],
+    confirmPassword: ["", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)]],
   });
 
 
@@ -46,7 +46,8 @@ export class ChangePasswordComponent {
         )
         .subscribe({
           next: () => {
-            this.dialogRef.close(this.form.value); // chiudi solo se va a buon fine
+            console.log("password cambiata con successo!")
+            this.dialogRef.close(); // chiudi solo se va a buon fine
           }
         });
     }
