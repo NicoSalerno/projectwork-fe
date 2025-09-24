@@ -1,0 +1,164 @@
+<app-nav-bar></app-nav-bar>
+
+<h1>Dashboard</h1>
+
+<!-- Pulsanti funzionalità -->
+<div class="btn-group">
+  <button (click)="showSection('funzione1')">Ultimi Movimenti</button>
+  <button (click)="showSection('funzione2')">Filtra Categoria</button>
+  <button (click)="showSection('funzione3')">Filtra Data</button>
+</div>
+
+<!-- ===== Funzione 1: Ultimi Movimenti ===== -->
+<div *ngIf="activeSection === 'funzione1'">
+  <h2>N Movimenti</h2>
+
+  <!-- Input numero movimenti -->
+  <div class="form-group">
+    <label for="num">Quanti movimenti?</label>
+    <input
+      id="num"
+      type="number"
+      [(ngModel)]="n"
+      (input)="nError = false"
+      class="input-field"
+    />
+    <button class="submit-btn" (click)="searchMovements()">Cerca</button>
+    <div *ngIf="nError" class="error">Inserisci un numero valido.</div>
+  </div>
+
+  <!-- Tabella movimenti -->
+  <div class="table-container" *ngIf="movements().length > 0">
+    <table class="movements-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Categoria</th>
+          <th>Importo</th>
+          <th>Descrizione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let m of movements()">
+          <td>{{ m.Data | date : "short" }}</td>
+          <td>{{ m.CategoriaMovimentoID }}</td>
+          <td>{{ m.Importo | currency : "EUR" }}</td>
+          <td>{{ m.DescrizioneEstesa }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Saldo finale -->
+    <div class="final-balance">
+      Saldo finale: {{ finalBalance() | currency : "EUR" }}
+    </div>
+
+    <div *ngIf="movements().length > 0" class="mt-6">
+      <button (click)="exportMovements()" class="export-btn">
+        Esporta in CSV
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Funzione 2 ===== -->
+<div *ngIf="activeSection === 'funzione2'" class="section">
+  <h1>Filtra categoria</h1>
+  <div class="mb-6">
+    <form (ngSubmit)="searchMovementsByCategory()" class="search-form">
+      <div class="form-group">
+        <label for="n">Numero di movimenti</label>
+        <input type="number" min="0" id="n" name="n" [(ngModel)]="n" />
+      </div>
+      <div class="form-group">
+        <label for="category">Categoria</label>
+        <select id="category" name="category" [(ngModel)]="selectedCategoryId">
+          <option [ngValue]="undefined" disabled>
+            Seleziona una categoria
+          </option>
+          <option *ngFor="let category of categories()" [ngValue]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+      <button type="submit">Cerca</button>
+    </form>
+  </div>
+
+  <div *ngIf="movements().length > 0" class="table-container">
+    <table class="table-results">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Importo</th>
+          <th>Categoria</th>
+          <th>Descrizione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movement of movements()">
+          <td>{{ movement.Data | date : "dd/MM/yyyy" }}</td>
+          <td>{{ movement.Saldo | currency : "EUR" }}</td>
+          <td>{{ movement.CategoriaMovimentoID }}</td>
+          <td>{{ movement.DescrizioneEstesa }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="movements().length > 0" class="mt-6 text-right">
+    <button (click)="exportMovements()" class="button-export">
+      Esporta in CSV
+    </button>
+  </div>
+</div>
+
+<!-- ===== Funzione 3 ===== -->
+<div *ngIf="activeSection === 'funzione3'" class="section">
+  <h2>Ricerca date</h2>
+  <h1>Ricerca Date</h1>
+  <div class="mb-6">
+    <form (ngSubmit)="searchMovementsByDate()" class="search-form">
+      <div class="form-group">
+        <label for="n">Numero di movimenti</label>
+        <input type="number" id="n" name="n" [(ngModel)]="n">
+      </div>
+      <div class="form-group">
+        <label for="startDate">Data Inizio</label>
+        <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+      </div>
+      <div class="form-group">
+        <label for="endDate">Data Fine</label>
+        <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
+      </div>
+      <button type="submit">Cerca</button>
+    </form>
+  </div>
+
+  <div *ngIf="movements().length > 0" class="table-container">
+    <table class="table-results">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Importo</th>
+          <th>Categoria</th>
+          <th>Descrizione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movement of movements()">
+          <td>{{ movement.Data| date: 'dd/MM/yyyy' }}</td>
+          <td>{{ movement.Saldo | currency: 'EUR' }}</td>
+          <td>{{ movement.CategoriaMovimentoID }}</td>
+          <td>{{ movement.DescrizioneEstesa }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="movements().length > 0" class="mt-6 text-right">
+    <button (click)="exportMovements()" class="button-export">
+      Esporta in CSV
+    </button>
+  </div>
+</div>

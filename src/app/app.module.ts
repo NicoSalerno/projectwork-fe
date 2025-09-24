@@ -22,6 +22,7 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsComponent } from './pages/details/details.component';
 import { WireTransferComponent } from './pages/wire-transfer/wire-transfer.component';
+import { FunctionalityComponent } from './pages/functionality/functionality.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { WireTransferComponent } from './pages/wire-transfer/wire-transfer.compo
     SettingsComponent,
     ChangePasswordComponent,
     DetailsComponent,
-    WireTransferComponent
+    WireTransferComponent,
+    FunctionalityComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-
 import { SettingsComponent } from './pages/settings/settings.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { WireTransferComponent } from './pages/wire-transfer/wire-transfer.component';
+import { FunctionalityComponent } from './pages/functionality/functionality.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path:'wire-transfer',
     component: WireTransferComponent
+  },
+  {
+    path:'functionality',
+    component: FunctionalityComponent
   }
 ];
 

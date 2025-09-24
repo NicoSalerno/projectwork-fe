@@ -8,6 +8,12 @@ export interface Movimento {
   DescrizioneEstesa: string;
 }
 
+export interface MovimentiResponse {
+  movimenti: Movimento[];
+  saldoFinale: number;
+}
+
+
 export interface ContoCorrente {
   ContoCorrenteID: number;
   Email: string;
