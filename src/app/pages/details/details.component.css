@@ -1,0 +1,52 @@
+/* Contenitore principale */
+div {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Titolo */
+h2 {
+  color: #343a40;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Lista dettagli */
+p {
+  background-color: #ffffff;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 5px solid green;
+  color: #495057;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Hover sui dettagli */
+p:hover {
+  background-color: #e9ecef;
+  transform: translateX(3px);
+}
+
+/* Animazione comparsa dei dettagli */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+div > * {
+  animation: fadeInUp 0.6s ease forwards;
+}

@@ -21,7 +21,7 @@
         sim_card
         </span> 
       </a>
-      <a [routerLink]="['/telephone-top-up']">      
+      <a [routerLink]="['/wire-transfer']">      
         <span class="material-symbols-outlined">
         money_range
         </span> 
@@ -61,6 +61,9 @@
           <div>{{ m.Data }}</div>
           <div>{{ m.DescrizioneEstesa }}</div>
           <div>{{ m.Importo }} €</div>
+          <a [routerLink]="['/details', m.IdMovimento]">
+            <p style="color:green;">Dettagli</p>
+          </a>
         </div>
       </div>
     </div>

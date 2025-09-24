@@ -6,6 +6,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SeeUsersComponent } from './pages/see-users/see-users.component';
 import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-up.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { DetailsComponent } from './pages/details/details.component';
+import { WireTransferComponent } from './pages/wire-transfer/wire-transfer.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path:'settings',
     component:SettingsComponent
+  },
+  {
+    path:'details/:id',
+    component: DetailsComponent
+  },
+  {
+    path:'wire-transfer',
+    component: WireTransferComponent
   }
 ];
 

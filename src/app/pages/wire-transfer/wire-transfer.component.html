@@ -1,0 +1,48 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="box">
+  <h1>Invio Bonifico</h1>
+  <p>Effettua un bonifico</p>
+
+  <form [formGroup]="wireForm" (ngSubmit)="wire()">
+    <!-- IBAN -->
+    <div class="form-group">
+      <label for="iban">IBAN del destinatario</label>
+      <input
+        type="text"
+        id="iban"
+        formControlName="iban"
+        placeholder="IT ** * ***** ***** ************"
+      />
+      <div
+        *ngIf="wireForm.get('iban')?.invalid && wireForm.get('iban')?.touched"
+        class="error"
+      >
+        <p style="color: red; padding-top: 10px">Inserisci un IBAN valido</p>
+      </div>
+    </div>
+
+    <!-- Importo -->
+    <div class="form-group">
+      <label for="importo">Importo</label>
+      <input
+        type="number"
+        id="importo"
+        formControlName="importo"
+        placeholder="Inserisci importo"
+      />
+      <div
+        *ngIf="wireForm.get('importo')?.invalid && wireForm.get('importo')?.touched"
+        class="error"
+      >
+        <p style="color: red; padding-top: 10px">Inserisci un importo valido</p>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="wireForm.invalid">Invia</button>
+  </form>
+
+  <div *ngIf="success" class="success-msg">
+    Bonifico effettuato!
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="movimento">
+  <h2>Dettagli Movimento</h2>
+  <p>CategoriaMovimentoId: {{ movimento.CategoriaMovimentoID }}</p>
+  <p>ID Movimento: {{ movimento.id }}</p>
+  <p>Data: {{ movimento.Data }}</p>
+  <p>Importo: {{ movimento.Importo.$numberDecimal }}</p>
+  <p>Saldo: {{ movimento.Saldo.$numberDecimal }}</p>
+  <p>Descrizione: {{ movimento.DescrizioneEstesa   }}</p>
+</div>
+
+<div *ngIf="!movimento">
+  <p>Caricamento...</p>
+</div>

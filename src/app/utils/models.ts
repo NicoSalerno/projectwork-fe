@@ -1,5 +1,5 @@
 export interface Movimento {
-  MovimentoID: number;
+  IdMovimento: number;
   ContoCorrenteID: number;
   Data: string;
   Importo: number;

@@ -20,6 +20,8 @@ export class TelephoneTopUpComponent implements OnInit {
   protected bankSrv = inject(BankService);
   protected datePipe = inject(DatePipe);
 
+  success = false; 
+
   telephoneForm = this.fb.group({
     operatoreTelefonico: ['', Validators.required],
     importo: ['', Validators.required],
@@ -45,7 +47,7 @@ export class TelephoneTopUpComponent implements OnInit {
         this.bankSrv.getContoCorrenteById(this.currentUser.contoCorrenteId)
           .subscribe({
             next: (res) => {
-              console.log("conto corrente utente a: ", res.id);
+              console.log("conto corrente utente: ", res.id);
               this.contoCorrenteId = res.id;
 
               const userId = res.User.id;
@@ -78,6 +80,7 @@ export class TelephoneTopUpComponent implements OnInit {
     ).subscribe({
       next: (res) => {
         console.log('Ricarica effettuata con successo', res);
+        this.success = true;
         this.telephoneForm.reset();
       },
       error: (err) => console.error('Errore durante la ricarica:', err)

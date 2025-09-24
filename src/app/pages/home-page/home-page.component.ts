@@ -45,7 +45,8 @@ export class HomePageComponent implements OnInit {
         next: (res) => {
           this.saldo = res.saldoFinale;
           console.log(res.saldoFinale)
-          this.movimenti$ = res.movimenti.slice(-5); // ultimi 5 movimenti
+          this.movimenti$ = res.movimenti.slice(0, 5);
+          console.log(this.movimenti$);
         },
         error: (err) => console.error('Errore nel recupero movimenti:', err)
       });

@@ -42,4 +42,19 @@ export class BankService {
     );
   }
 
+  addWire(contoId: string, Importo: number, DestinatarioIBAN: string, CategoriaMovimentoID: string){
+    const payload = {
+      Importo,
+      DestinatarioIBAN,
+      CategoriaMovimentoID
+    }
+      return this.http.post(
+      `/api/Movimenti/addBonifico/${contoId}`,
+      payload
+    );
+  }
+
+  getMovementById(contoId: string, movimentoId: string){
+    return this.http.get(`/api/Movimenti/getMovimentoById/${contoId}/${movimentoId}`);
+  }
 }

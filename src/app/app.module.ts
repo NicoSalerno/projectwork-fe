@@ -20,6 +20,8 @@ import { TelephoneTopUpComponent } from './pages/telephone-top-up/telephone-top-
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DetailsComponent } from './pages/details/details.component';
+import { WireTransferComponent } from './pages/wire-transfer/wire-transfer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     TelephoneTopUpComponent,
     SettingsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DetailsComponent,
+    WireTransferComponent
   ],
   imports: [
     BrowserModule,
