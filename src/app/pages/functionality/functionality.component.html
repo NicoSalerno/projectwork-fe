@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 
-<h1>Dashboard</h1>
+<h1>Funzionalità</h1>
 
 <!-- Pulsanti funzionalità -->
 <div class="btn-group">
@@ -19,6 +19,7 @@
     <input
       id="num"
       type="number"
+      min="0"
       [(ngModel)]="n"
       (input)="nError = false"
       class="input-field"
