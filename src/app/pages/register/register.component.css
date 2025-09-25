@@ -122,6 +122,7 @@ button:hover {
 
 .text-error{
   color: red;
+  padding: 10px;
 }
 
 @keyframes slideInRight {

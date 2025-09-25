@@ -32,9 +32,9 @@ export class FunctionalityComponent implements OnInit {
   endDate = signal<string | undefined>(undefined);
 
   categories = signal([
-    { id: '68d3af24b225064cc868f5c9', name: 'Bonifico Entrata' },
-    { id: '68d3a739d84610eda70f0be4', name: 'Bonifico Uscita' },
-    { id: '68cd1ffcd622698d8b058383', name: 'Ricarica' },
+    { id: '68d4e8af80001e0763c3488a', name: 'Bonifico Entrata' },
+    { id: '68d4e8af80001e0763c34889', name: 'Bonifico Uscita' },
+    { id: '68d4e8af80001e0763c34888', name: 'Ricarica' },
   ]);
 
   ngOnInit(): void {

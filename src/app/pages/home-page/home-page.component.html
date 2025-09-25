@@ -58,7 +58,7 @@
           </span> 
         </div>
         <div class="movement-text">
-          <div>{{ m.Data }}</div>
+          <div>{{ m.Data | date }}</div>
           <div>{{ m.DescrizioneEstesa }}</div>
           <div>{{ m.Importo }} €</div>
           <a [routerLink]="['/details', m.IdMovimento]">

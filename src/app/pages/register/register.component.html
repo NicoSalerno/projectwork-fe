@@ -55,16 +55,19 @@
 
       <div class="form-group">
         <label>Cognome titolare</label>
-        <input type="text" formControlName="CognomeTitolare" placeholder="Rossi" />
+        <input
+          type="text"
+          formControlName="CognomeTitolare"
+          placeholder="Rossi"
+        />
       </div>
 
       <!-- Submit -->
-      <button type="submit">Accedi</button>
+      <button type="submit">Registrati</button>
     </form>
-  </div>
-
-  <div class="text-error" *ngIf="registerError">
-    {{ registerError }}
+    <div class="text-error" *ngIf="registerError">
+      {{ registerError }}
+    </div>
   </div>
 
   <!-- Colonna destra: Immagine/Testo -->

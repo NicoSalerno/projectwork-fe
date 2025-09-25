@@ -63,7 +63,7 @@ wire() {
     return;
   }
 
-  this.bankSrv.addWire(this.contoCorrenteId, importoNumber, iban, "68d3a739d84610eda70f0be4")
+  this.bankSrv.addWire(this.contoCorrenteId, importoNumber, iban, "68d4e8af80001e0763c34889")
     .subscribe({
       next: (res) => {
         console.log('Bonifico effettuato con successo!', res);
