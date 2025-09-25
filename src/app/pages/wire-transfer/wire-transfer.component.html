@@ -5,9 +5,20 @@
   <p>Effettua un bonifico</p>
 
   <form [formGroup]="wireForm" (ngSubmit)="wire()">
+
+        <!-- Nome -->
+    <div class="form-group">
+      <label for="iban">Nome e cognome</label>
+      <input
+        type="text"
+        placeholder="Mario Rossi"
+        required="true"
+      />
+    </div>
+
     <!-- IBAN -->
     <div class="form-group">
-      <label for="iban">IBAN del destinatario</label>
+      <label for="iban">IBAN del destinatario*</label>
       <input
         type="text"
         id="iban"
@@ -24,7 +35,7 @@
 
     <!-- Importo -->
     <div class="form-group">
-      <label for="importo">Importo</label>
+      <label for="importo">Importo*</label>
       <input
         type="number"
         id="importo"
