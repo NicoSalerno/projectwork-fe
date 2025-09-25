@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { ContoCorrente } from "../entities/user.entity";
@@ -17,7 +21,7 @@ export class BankService {
   }
 
   getMovimentiConto(contoCorrenteId: string): Observable<any> {
-    const params = new HttpParams().set('ContoCorrenteID', contoCorrenteId);
+    const params = new HttpParams().set("ContoCorrenteID", contoCorrenteId);
     return this.http.get(`/api/Movimenti/getMovimentiConto`, { params });
   }
 
@@ -37,30 +41,28 @@ export class BankService {
       NumeroTelefono,
     };
 
-    return this.http.post(
-      `/api/Movimenti/addRicarica/${contoId}`,
-      payload
-    );
+    return this.http.post(`/api/Movimenti/addRicarica/${contoId}`, payload);
   }
 
-  addWire(contoId: string, Importo: number, DestinatarioIBAN: string, CategoriaMovimentoID: string){
+  addWire(
+    contoId: string,
+    Importo: number,
+    DestinatarioIBAN: string,
+    CategoriaMovimentoID: string
+  ) {
     const payload = {
       Importo,
       DestinatarioIBAN,
-      CategoriaMovimentoID
-    }
-      return this.http.post(
-      `/api/Movimenti/addBonifico/${contoId}`,
-      payload
+      CategoriaMovimentoID,
+    };
+    return this.http.post(`/api/Movimenti/addBonifico/${contoId}`, payload);
+  }
+
+  getMovementById(contoId: string, movimentoId: string) {
+    return this.http.get(
+      `/api/Movimenti/getMovimentoById/${contoId}/${movimentoId}`
     );
   }
-
-  getMovementById(contoId: string, movimentoId: string){
-    return this.http.get(`/api/Movimenti/getMovimentoById/${contoId}/${movimentoId}`);
-  }
-
-  
-
 
   getLatestMovements(contoCorrenteId: string, n: number) {
     return this.http.get<MovimentiResponse>(
@@ -68,44 +70,75 @@ export class BankService {
     );
   }
 
-  getMovementsByCategoryAndAccount(contoCorrenteId: string, categoriaId: string, n: number): Observable<{ movimenti: Movimento[] }> {
+  getMovementsByCategoryAndAccount(
+    contoCorrenteId: string,
+    categoriaId: string,
+    n: number
+  ): Observable<{ movimenti: Movimento[] }> {
     const url = `/api/Movimenti/getMovimentiByCategoriaEConto?ContoCorrenteID=${contoCorrenteId}&CategoriaMovimentoID=${categoriaId}&n=${n}`;
     return this.http.get<{ movimenti: Movimento[] }>(url);
   }
 
-getMovementsByDateRange(
-  contoCorrenteId: string,
-  startDate: string,
-  endDate: string,
-  n: number
-): Observable<{ movimenti: Movimento[] }> {
-  const url = `/api/Movimenti/getMovimentiByContoEIntervalloDate?ContoCorrenteID=${contoCorrenteId}&startDate=${startDate}&endDate=${endDate}&n=${n}`;
-  return this.http.get<{ movimenti: Movimento[] }>(url);
-}
-
+  getMovementsByDateRange(
+    contoCorrenteId: string,
+    startDate: string,
+    endDate: string,
+    n: number
+  ): Observable<{ movimenti: Movimento[] }> {
+    const url = `/api/Movimenti/getMovimentiByContoEIntervalloDate?ContoCorrenteID=${contoCorrenteId}&startDate=${startDate}&endDate=${endDate}&n=${n}`;
+    return this.http.get<{ movimenti: Movimento[] }>(url);
+  }
 
   // Funzione di esportazione CSV
   exportToCsv(movements: Movimento[]): void {
-    const header = ['Data', 'Importo', 'NomeCategoria'];
-    const csv = [
-      header.join(','),
-      ...movements.map(m => [m.Data, m.Saldo, m.CategoriaMovimentoID].join(','))
-    ].join('\n');
+    const header = ["Data", "Importo", "Categoria"];
 
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const escapeCsv = (value: any): string => {
+      if (value == null) return "";
+      const str = value.toString();
+      if (/[",\n]/.test(str)) {
+        return `"${str.replace(/"/g, '""')}"`;
+      }
+      return str;
+    };
+
+    const rows = movements.map((m) => [
+      escapeCsv(this.formatDate(m.Data)), // esempio di formattazione
+      escapeCsv(m.Importo), // o m.Importo se hai la proprietà
+      escapeCsv(m.NomeCategoria), // mappa ID → nome
+    ]);
+
+    const csv = [header.join(","), ...rows.map((r) => r.join(","))].join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'movimenti.csv';
+    a.download = "movimenti.csv";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
+  formatDate(date: any): string {
+    const d = new Date(date);
+    return d.toLocaleDateString("it-IT"); // es. 25/09/2025
+  }
+
+  getCategoriaNome(id: number): string {
+    const categorie: Record<number, string> = {
+      1: "Alimentari",
+      2: "Trasporti",
+      3: "Utenze",
+      // aggiungi altre mappature
+    };
+    return categorie[id] ?? `Categoria ${id}`;
+  }
+
   // Gestione degli errori HTTP
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'Errore sconosciuto';
+    let errorMessage = "Errore sconosciuto";
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Errore: ${error.error.message}`;
     } else {

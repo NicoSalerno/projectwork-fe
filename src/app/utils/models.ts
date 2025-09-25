@@ -4,6 +4,7 @@ export interface Movimento {
   Data: string;
   Importo: number;
   Saldo: number;
+  NomeCategoria: string;
   CategoriaMovimentoID: number;
   DescrizioneEstesa: string;
 }
