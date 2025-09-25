@@ -139,12 +139,13 @@ export class FunctionalityComponent implements OnInit {
       }
     });
   }
+
   exportMovements(): void {
     if (this.movements().length === 0) {
       console.warn("Nessun movimento da esportare.");
       return;
     }
-    this.movementsService.exportToCsv(this.movements());
+    this.bankSrv.exportToCsv(this.movements());
   }
   
 }
