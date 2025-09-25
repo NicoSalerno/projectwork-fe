@@ -74,7 +74,7 @@ export class TelephoneTopUpComponent implements OnInit {
       this.contoCorrenteId,
       formattedDate!,
       Number(importo),
-      '68d4e8af80001e0763c34888', // TODO: gestire dinamicamente la categoria
+      '68d50455ed3abeb54bc039c1', // TODO: gestire dinamicamente la categoria
       operatoreTelefonico ?? '',
       number ?? ''
     ).subscribe({

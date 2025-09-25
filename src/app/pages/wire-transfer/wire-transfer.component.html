@@ -32,7 +32,9 @@
         placeholder="Inserisci importo"
       />
       <div
-        *ngIf="wireForm.get('importo')?.invalid && wireForm.get('importo')?.touched"
+        *ngIf="
+          wireForm.get('importo')?.invalid && wireForm.get('importo')?.touched
+        "
         class="error"
       >
         <p style="color: red; padding-top: 10px">Inserisci un importo valido</p>
@@ -40,9 +42,11 @@
     </div>
 
     <button type="submit" [disabled]="wireForm.invalid">Invia</button>
+
+    <div style="color: red;" *ngIf="error">
+      {{ error }}
+    </div>
   </form>
 
-  <div *ngIf="success" class="success-msg">
-    Bonifico effettuato!
-  </div>
+  <div *ngIf="success" class="success-msg">Bonifico effettuato!</div>
 </div>
